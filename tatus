@@ -1,0 +1,565 @@
+[1mdiff --git a/.github/pull_request_template.md b/.github/pull_request_template.md[m
+[1mnew file mode 100644[m
+[1mindex 0000000..42d43da[m
+[1m--- /dev/null[m
+[1m+++ b/.github/pull_request_template.md[m
+[36m@@ -0,0 +1,20 @@[m
+[32m+[m[32m## Mit változtattam?[m
+[32m+[m
+[32m+[m[32m- Írd le röviden a módosítást.[m
+[32m+[m
+[32m+[m[32m## Miért készült a változtatás?[m
+[32m+[m
+[32m+[m[32m- Írd le, milyen célt old meg a változtatás.[m
+[32m+[m
+[32m+[m[32m## Hogyan teszteltem?[m
+[32m+[m
+[32m+[m[32m- [ ] A témaváltó gomb sötét témára vált.[m
+[32m+[m[32m- [ ] A második kattintás visszaállítja a világos témát.[m
+[32m+[m[32m- [ ] A profilfrissítés mindkét témában működik.[m
+[32m+[m[32m- [ ] Az Alapértékek gomb mindkét témában működik.[m
+[32m+[m[32m- [ ] A böngésző konzolja nem jelez hibát.[m
+[32m+[m[32m- [ ] Keskeny nézetben sincs vízszintes görgetés.[m
+[32m+[m
+[32m+[m[32m## Képernyőkép vagy megjegyzés[m
+[32m+[m
+[32m+[m[32mHa van, illeszd be ide a képernyőképet vagy írd le a megfigyelést.[m
+[1mdiff --git a/.gitignore b/.gitignore[m
+[1mnew file mode 100644[m
+[1mindex 0000000..3c083aa[m
+[1m--- /dev/null[m
+[1m+++ b/.gitignore[m
+[36m@@ -0,0 +1,10 @@[m
+[32m+[m[32m# Operációs rendszer által létrehozott fájlok[m
+[32m+[m[32m.DS_Store[m
+[32m+[m[32mThumbs.db[m
+[32m+[m
+[32m+[m[32m# Helyi szerkesztőbeállítások[m
+[32m+[m[32m.vscode/[m
+[32m+[m[32m.idea/[m
+[32m+[m
+[32m+[m[32m# Ha később Node.js-eszköz kerülne a projektbe[m
+[32m+[m[32mnode_modules/[m
+[1mdiff --git a/README.md b/README.md[m
+[1mnew file mode 100644[m
+[1mindex 0000000..03c9e58[m
+[1m--- /dev/null[m
+[1m+++ b/README.md[m
+[36m@@ -0,0 +1,37 @@[m
+[32m+[m[32m# Profilkártya-szerkesztő[m
+[32m+[m
+[32m+[m[32mEgyszerű JavaScript-, Git- és GitHub-alapozó projekt. Az űrlap adatai egy profilkártyán jelennek meg, a felület számolja a sikeres frissítéseket, alaphelyzetbe állítható, majd külön feature branchen sötét témával bővül.[m
+[32m+[m
+[32m+[m[32m## Használat[m
+[32m+[m
+[32m+[m[32m1. Nyisd meg a mappát Visual Studio Code-ban.[m
+[32m+[m[32m2. Nyisd meg az `index.html` fájlt böngészőben, vagy használd a Live Server bővítményt.[m
+[32m+[m[32m3. A JavaScript-kódot az `app.js` fájlban írd meg.[m
+[32m+[m[32m4. A böngésző konzolját az `F12` billentyűvel nyisd meg.[m
+[32m+[m
+[32m+[m[32mNincs telepítendő függőség és nincs buildlépés.[m
+[32m+[m
+[32m+[m[32m## Fájlok[m
+[32m+[m
+[32m+[m[32m- `index.html` – a felület szerkezete;[m
+[32m+[m[32m- `styles.css` – a kész alapmegjelenés;[m
+[32m+[m[32m- `app.js` – a tanuló által elkészítendő működés;[m
+[32m+[m[32m- `.github/pull_request_template.md` – segítség a pull request leírásához;[m
+[32m+[m[32m- `.gitignore` – helyi, nem verziókezelendő fájlok listája.[m
+[32m+[m
+[32m+[m[32m## Funkciók[m
+[32m+[m
+[32m+[m[32m- [ ] Az űrlap adatainak megjelenítése a profilkártyán[m
+[32m+[m[32m- [ ] Kötelező mezők ellenőrzése[m
+[32m+[m[32m- [ ] Sikeres frissítések számlálása[m
+[32m+[m[32m- [ ] Alapértékek visszaállítása[m
+[32m+[m[32m- [ ] Sötét téma a `feature/sotet-tema` branchen[m
+[32m+[m[32m- [ ] GitHub pull request és merge[m
+[32m+[m
+[32m+[m[32m## Készítő[m
+[32m+[m
+[32m+[m[32mNév: Mercz Péter[m
+[32m+[m
+[32m+[m[32m## Tesztelés[m
+[32m+[m
+[32m+[m[32mA projektet kézzel teszteltem asztali és keskeny böngészőnézetben. A részletes tesztlépések a pull request leírásában szerepelnek.[m
+[1mdiff --git a/app.js b/app.js[m
+[1mnew file mode 100644[m
+[1mindex 0000000..75b18d1[m
+[1m--- /dev/null[m
+[1m+++ b/app.js[m
+[36m@@ -0,0 +1,30 @@[m
+[32m+[m[32m"use strict";[m
+[32m+[m
+[32m+[m[32m/*[m
+[32m+[m[32m * JavaScript + Git alapozó projekt[m
+[32m+[m[32m *[m
+[32m+[m[32m * Az oldal HTML- és CSS-része készen áll. A feladatod az alábbi lépések[m
+[32m+[m[32m * megvalósítása a 03_LEPESROL_LEPESRE_GYAKORLAT.md útmutató alapján.[m
+[32m+[m[32m *[m
+[32m+[m[32m * 1. Válaszd ki a szükséges DOM-elemeket querySelector() segítségével.[m
+[32m+[m[32m * 2. Hozz létre egy változó állapotot a sikeres frissítések számához.[m
+[32m+[m[32m * 3. Írd meg az űrlap adatait beolvasó függvényt.[m
+[32m+[m[32m * 4. Írd meg az adatellenőrző függvényt.[m
+[32m+[m[32m * 5. Írd meg a kártyát frissítő és a státuszt jelző függvényt.[m
+[32m+[m[32m * 6. Kezeld az űrlap submit és az Alapértékek gomb click eseményét.[m
+[32m+[m[32m * 7. A feature/sotet-tema branchen add hozzá a témaváltást.[m
+[32m+[m[32m */[m
+[32m+[m
+[32m+[m[32m// 1. DOM-elemek kiválasztása következik itt.[m
+[32m+[m
+[32m+[m
+[32m+[m[32m// 2. A program változó állapota következik itt.[m
+[32m+[m
+[32m+[m
+[32m+[m[32m// 3. A kisebb, egy feladatú függvények következnek itt.[m
+[32m+[m
+[32m+[m
+[32m+[m[32m// 4. Az eseménykezelők következnek itt.[m
+[32m+[m
+[32m+[m
+[32m+[m[32m// 5. A témaváltó eseménykezelő csak a feature/sotet-tema ágon készül el.[m
+[1mdiff --git a/index.html b/index.html[m
+[1mnew file mode 100644[m
+[1mindex 0000000..266c122[m
+[1m--- /dev/null[m
+[1m+++ b/index.html[m
+[36m@@ -0,0 +1,121 @@[m
+[32m+[m[32m<!DOCTYPE html>[m
+[32m+[m[32m<html lang="hu">[m
+[32m+[m[32m  <head>[m
+[32m+[m[32m    <meta charset="UTF-8">[m
+[32m+[m[32m    <meta name="viewport" content="width=device-width, initial-scale=1.0">[m
+[32m+[m[32m    <meta[m
+[32m+[m[32m      name="description"[m
+[32m+[m[32m      content="JavaScript és Git alapozó profilkártya mini-projekt."[m
+[32m+[m[32m    >[m
+[32m+[m[32m    <title>Profilkártya-szerkesztő</title>[m
+[32m+[m[32m    <link rel="stylesheet" href="styles.css">[m
+[32m+[m[32m    <script src="app.js" defer></script>[m
+[32m+[m[32m  </head>[m
+[32m+[m[32m  <body>[m
+[32m+[m[32m    <header class="site-header">[m
+[32m+[m[32m      <div class="container">[m
+[32m+[m[32m        <p class="eyebrow">JavaScript + Git mini-projekt</p>[m
+[32m+[m[32m        <h1>Profilkártya-szerkesztő</h1>[m
+[32m+[m[32m        <p class="lead">[m
+[32m+[m[32m          Töltsd ki az űrlapot, és jelenítsd meg az adatokat a kártyán![m
+[32m+[m[32m        </p>[m
+[32m+[m[32m      </div>[m
+[32m+[m[32m    </header>[m
+[32m+[m
+[32m+[m[32m    <main class="container page-layout">[m
+[32m+[m[32m      <section class="panel" aria-labelledby="editorTitle">[m
+[32m+[m[32m        <h2 id="editorTitle">Profil szerkesztése</h2>[m
+[32m+[m[32m        <p class="section-intro">[m
+[32m+[m[32m          A mezők már elkészültek. A működést az <code>app.js</code> fájlban[m
+[32m+[m[32m          fogod megírni.[m
+[32m+[m[32m        </p>[m
+[32m+[m
+[32m+[m[32m        <form id="profileForm">[m
+[32m+[m[32m          <div class="form-field">[m
+[32m+[m[32m            <label for="displayName">Megjelenő név</label>[m
+[32m+[m[32m            <input[m
+[32m+[m[32m              id="displayName"[m
+[32m+[m[32m              name="displayName"[m
+[32m+[m[32m              type="text"[m
+[32m+[m[32m              value="Kódoló Kata"[m
+[32m+[m[32m              maxlength="40"[m
+[32m+[m[32m              required[m
+[32m+[m[32m            >[m
+[32m+[m[32m          </div>[m
+[32m+[m
+[32m+[m[32m          <div class="form-field">[m
+[32m+[m[32m            <label for="role">Szerepkör vagy tanulási cél</label>[m
+[32m+[m[32m            <input[m
+[32m+[m[32m              id="role"[m
+[32m+[m[32m              name="role"[m
+[32m+[m[32m              type="text"[m
+[32m+[m[32m              value="Junior frontend fejlesztő"[m
+[32m+[m[32m              maxlength="60"[m
+[32m+[m[32m              required[m
+[32m+[m[32m            >[m
+[32m+[m[32m          </div>[m
+[32m+[m
+[32m+[m[32m          <div class="form-field">[m
+[32m+[m[32m            <label for="technology">Kedvenc technológia</label>[m
+[32m+[m[32m            <select id="technology" name="technology" required>[m
+[32m+[m[32m              <option value="HTML">HTML</option>[m
+[32m+[m[32m              <option value="CSS">CSS</option>[m
+[32m+[m[32m              <option value="JavaScript" selected>JavaScript</option>[m
+[32m+[m[32m              <option value="Git">Git</option>[m
+[32m+[m[32m            </select>[m
+[32m+[m[32m          </div>[m
+[32m+[m
+[32m+[m[32m          <div class="button-row">[m
+[32m+[m[32m            <button class="button button--primary" type="submit">[m
+[32m+[m[32m              Profil frissítése[m
+[32m+[m[32m            </button>[m
+[32m+[m[32m            <button[m
+[32m+[m[32m              class="button button--secondary"[m
+[32m+[m[32m              id="resetButton"[m
+[32m+[m[32m              type="button"[m
+[32m+[m[32m            >[m
+[32m+[m[32m              Alapértékek[m
+[32m+[m[32m            </button>[m
+[32m+[m[32m          </div>[m
+[32m+[m
+[32m+[m[32m          <p id="statusMessage" class="status" role="status" aria-live="polite"></p>[m
+[32m+[m[32m        </form>[m
+[32m+[m[32m      </section>[m
+[32m+[m
+[32m+[m[32m      <section class="panel preview" aria-labelledby="previewTitle">[m
+[32m+[m[32m        <div class="preview-heading">[m
+[32m+[m[32m          <div>[m
+[32m+[m[32m            <p class="eyebrow">Élő előnézet</p>[m
+[32m+[m[32m            <h2 id="previewTitle">A profilod</h2>[m
+[32m+[m[32m          </div>[m
+[32m+[m[32m          <span class="counter" title="Sikeres frissítések száma">[m
+[32m+[m[32m            Frissítések: <output id="updateCount">0</output>[m
+[32m+[m[32m          </span>[m
+[32m+[m[32m        </div>[m
+[32m+[m
+[32m+[m[32m        <article class="profile-card" aria-label="Profilkártya előnézete">[m
+[32m+[m[32m          <div class="avatar" aria-hidden="true">JS</div>[m
+[32m+[m[32m          <div>[m
+[32m+[m[32m            <h3 id="cardName">Kódoló Kata</h3>[m
+[32m+[m[32m            <p id="cardRole" class="role">Junior frontend fejlesztő</p>[m
+[32m+[m[32m            <p class="technology-line">[m
+[32m+[m[32m              Kedvenc technológia:[m
+[32m+[m[32m              <strong id="cardTechnology">JavaScript</strong>[m
+[32m+[m[32m            </p>[m
+[32m+[m[32m          </div>[m
+[32m+[m[32m        </article>[m
+[32m+[m
+[32m+[m[32m        <aside class="test-hint" aria-label="Tesztelési emlékeztető">[m
+[32m+[m[32m          <strong>Teszteld:</strong> módosíts minden mezőt, küldd el az űrlapot,[m
+[32m+[m[32m          majd próbáld ki az Alapértékek gombot is.[m
+[32m+[m[32m        </aside>[m
+[32m+[m[32m      </section>[m
+[32m+[m[32m    </main>[m
+[32m+[m
+[32m+[m[32m    <footer class="site-footer">[m
+[32m+[m[32m      <div class="container">[m
+[32m+[m[32m        <p>Gyakorlóprojekt – HTML, CSS, JavaScript, Git és GitHub</p>[m
+[32m+[m[32m      </div>[m
+[32m+[m[32m    </footer>[m
+[32m+[m[32m  </body>[m
+[32m+[m[32m</html>[m
+[1mdiff --git a/styles.css b/styles.css[m
+[1mnew file mode 100644[m
+[1mindex 0000000..26be0d3[m
+[1m--- /dev/null[m
+[1m+++ b/styles.css[m
+[36m@@ -0,0 +1,311 @@[m
+[32m+[m[32m:root {[m
+[32m+[m[32m  color-scheme: light;[m
+[32m+[m[32m  --color-bg: #f4f7fb;[m
+[32m+[m[32m  --color-surface: #ffffff;[m
+[32m+[m[32m  --color-surface-muted: #eef4ff;[m
+[32m+[m[32m  --color-text: #172033;[m
+[32m+[m[32m  --color-text-muted: #5e6a7f;[m
+[32m+[m[32m  --color-primary: #4f46e5;[m
+[32m+[m[32m  --color-primary-hover: #3730a3;[m
+[32m+[m[32m  --color-border: #d9e0ec;[m
+[32m+[m[32m  --color-success: #166534;[m
+[32m+[m[32m  --color-error: #b42318;[m
+[32m+[m[32m  --shadow: 0 18px 45px rgb(31 41 55 / 10%);[m
+[32m+[m[32m  --radius: 18px;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m* {[m
+[32m+[m[32m  box-sizing: border-box;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mhtml {[m
+[32m+[m[32m  font-family:[m
+[32m+[m[32m    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",[m
+[32m+[m[32m    sans-serif;[m
+[32m+[m[32m  line-height: 1.5;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mbody {[m
+[32m+[m[32m  min-width: 320px;[m
+[32m+[m[32m  min-height: 100vh;[m
+[32m+[m[32m  margin: 0;[m
+[32m+[m[32m  color: var(--color-text);[m
+[32m+[m[32m  background:[m
+[32m+[m[32m    radial-gradient(circle at top right, rgb(79 70 229 / 12%), transparent 30rem),[m
+[32m+[m[32m    var(--color-bg);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mbutton,[m
+[32m+[m[32minput,[m
+[32m+[m[32mselect {[m
+[32m+[m[32m  font: inherit;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.container {[m
+[32m+[m[32m  width: min(1100px, calc(100% - 2rem));[m
+[32m+[m[32m  margin-inline: auto;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.site-header {[m
+[32m+[m[32m  padding: 3rem 0 2rem;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.eyebrow {[m
+[32m+[m[32m  margin: 0 0 0.35rem;[m
+[32m+[m[32m  color: var(--color-primary);[m
+[32m+[m[32m  font-size: 0.78rem;[m
+[32m+[m[32m  font-weight: 800;[m
+[32m+[m[32m  letter-spacing: 0.12em;[m
+[32m+[m[32m  text-transform: uppercase;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mh1,[m
+[32m+[m[32mh2,[m
+[32m+[m[32mh3,[m
+[32m+[m[32mp {[m
+[32m+[m[32m  margin-top: 0;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mh1 {[m
+[32m+[m[32m  max-width: 16ch;[m
+[32m+[m[32m  margin-bottom: 0.75rem;[m
+[32m+[m[32m  font-size: clamp(2rem, 5vw, 3.6rem);[m
+[32m+[m[32m  line-height: 1.05;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mh2 {[m
+[32m+[m[32m  margin-bottom: 0.4rem;[m
+[32m+[m[32m  font-size: 1.35rem;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.lead,[m
+[32m+[m[32m.section-intro {[m
+[32m+[m[32m  color: var(--color-text-muted);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.lead {[m
+[32m+[m[32m  max-width: 60ch;[m
+[32m+[m[32m  margin-bottom: 0;[m
+[32m+[m[32m  font-size: 1.08rem;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.page-layout {[m
+[32m+[m[32m  display: grid;[m
+[32m+[m[32m  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);[m
+[32m+[m[32m  gap: 1.5rem;[m
+[32m+[m[32m  align-items: start;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.panel {[m
+[32m+[m[32m  padding: clamp(1.25rem, 3vw, 2rem);[m
+[32m+[m[32m  border: 1px solid var(--color-border);[m
+[32m+[m[32m  border-radius: var(--radius);[m
+[32m+[m[32m  background: var(--color-surface);[m
+[32m+[m[32m  box-shadow: var(--shadow);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.form-field {[m
+[32m+[m[32m  display: grid;[m
+[32m+[m[32m  gap: 0.4rem;[m
+[32m+[m[32m  margin-bottom: 1rem;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mlabel {[m
+[32m+[m[32m  font-weight: 700;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32minput,[m
+[32m+[m[32mselect {[m
+[32m+[m[32m  width: 100%;[m
+[32m+[m[32m  min-height: 2.8rem;[m
+[32m+[m[32m  padding: 0.65rem 0.75rem;[m
+[32m+[m[32m  border: 1px solid var(--color-border);[m
+[32m+[m[32m  border-radius: 10px;[m
+[32m+[m[32m  color: var(--color-text);[m
+[32m+[m[32m  background: var(--color-surface);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32minput:focus,[m
+[32m+[m[32mselect:focus,[m
+[32m+[m[32mbutton:focus-visible {[m
+[32m+[m[32m  outline: 3px solid rgb(79 70 229 / 28%);[m
+[32m+[m[32m  outline-offset: 2px;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button-row {[m
+[32m+[m[32m  display: flex;[m
+[32m+[m[32m  flex-wrap: wrap;[m
+[32m+[m[32m  gap: 0.75rem;[m
+[32m+[m[32m  margin-top: 1.25rem;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button {[m
+[32m+[m[32m  min-height: 2.75rem;[m
+[32m+[m[32m  padding: 0.65rem 1rem;[m
+[32m+[m[32m  border: 1px solid transparent;[m
+[32m+[m[32m  border-radius: 10px;[m
+[32m+[m[32m  font-weight: 800;[m
+[32m+[m[32m  cursor: pointer;[m
+[32m+[m[32m  transition:[m
+[32m+[m[32m    transform 150ms ease,[m
+[32m+[m[32m    background-color 150ms ease;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button:hover {[m
+[32m+[m[32m  transform: translateY(-1px);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button--primary {[m
+[32m+[m[32m  color: #ffffff;[m
+[32m+[m[32m  background: var(--color-primary);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button--primary:hover {[m
+[32m+[m[32m  background: var(--color-primary-hover);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.button--secondary {[m
+[32m+[m[32m  border-color: var(--color-border);[m
+[32m+[m[32m  color: var(--color-text);[m
+[32m+[m[32m  background: var(--color-surface-muted);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.status {[m
+[32m+[m[32m  min-height: 1.5rem;[m
+[32m+[m[32m  margin: 0.9rem 0 0;[m
+[32m+[m[32m  color: var(--color-success);[m
+[32m+[m[32m  font-weight: 700;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.status--error {[m
+[32m+[m[32m  color: var(--color-error);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.preview-heading {[m
+[32m+[m[32m  display: flex;[m
+[32m+[m[32m  gap: 1rem;[m
+[32m+[m[32m  align-items: start;[m
+[32m+[m[32m  justify-content: space-between;[m
+[32m+[m[32m  margin-bottom: 1.25rem;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.preview-heading h2 {[m
+[32m+[m[32m  margin-bottom: 0;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.counter {[m
+[32m+[m[32m  flex: 0 0 auto;[m
+[32m+[m[32m  padding: 0.4rem 0.65rem;[m
+[32m+[m[32m  border-radius: 999px;[m
+[32m+[m[32m  color: var(--color-primary);[m
+[32m+[m[32m  background: var(--color-surface-muted);[m
+[32m+[m[32m  font-size: 0.85rem;[m
+[32m+[m[32m  font-weight: 800;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.profile-card {[m
+[32m+[m[32m  display: grid;[m
+[32m+[m[32m  grid-template-columns: auto 1fr;[m
+[32m+[m[32m  gap: 1rem;[m
+[32m+[m[32m  align-items: center;[m
+[32m+[m[32m  min-height: 220px;[m
+[32m+[m[32m  padding: clamp(1.25rem, 4vw, 2rem);[m
+[32m+[m[32m  border: 1px solid rgb(79 70 229 / 20%);[m
+[32m+[m[32m  border-radius: 16px;[m
+[32m+[m[32m  background: linear-gradient(135deg, var(--color-surface-muted), var(--color-surface));[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.avatar {[m
+[32m+[m[32m  display: grid;[m
+[32m+[m[32m  width: 4.25rem;[m
+[32m+[m[32m  height: 4.25rem;[m
+[32m+[m[32m  border-radius: 50%;[m
+[32m+[m[32m  place-items: center;[m
+[32m+[m[32m  color: #ffffff;[m
+[32m+[m[32m  background: var(--color-primary);[m
+[32m+[m[32m  font-size: 1.25rem;[m
+[32m+[m[32m  font-weight: 900;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.profile-card h3 {[m
+[32m+[m[32m  margin-bottom: 0.25rem;[m
+[32m+[m[32m  font-size: 1.55rem;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.role {[m
+[32m+[m[32m  margin-bottom: 0.85rem;[m
+[32m+[m[32m  color: var(--color-text-muted);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.technology-line {[m
+[32m+[m[32m  margin-bottom: 0;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.test-hint {[m
+[32m+[m[32m  margin-top: 1rem;[m
+[32m+[m[32m  padding: 0.9rem 1rem;[m
+[32m+[m[32m  border-left: 4px solid var(--color-primary);[m
+[32m+[m[32m  border-radius: 8px;[m
+[32m+[m[32m  color: var(--color-text-muted);[m
+[32m+[m[32m  background: var(--color-surface-muted);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.site-footer {[m
+[32m+[m[32m  padding: 2rem 0;[m
+[32m+[m[32m  color: var(--color-text-muted);[m
+[32m+[m[32m  text-align: center;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m.site-footer p {[m
+[32m+[m[32m  margin-bottom: 0;[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32mcode {[m
+[32m+[m[32m  padding: 0.12rem 0.35rem;[m
+[32m+[m[32m  border-radius: 5px;[m
+[32m+[m[32m  color: var(--color-primary-hover);[m
+[32m+[m[32m  background: var(--color-surface-muted);[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m@media (max-width: 760px) {[m
+[32m+[m[32m  .site-header {[m
+[32m+[m[32m    padding-top: 2rem;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .page-layout {[m
+[32m+[m[32m    grid-template-columns: 1fr;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m@media (max-width: 480px) {[m
+[32m+[m[32m  .container {[m
+[32m+[m[32m    width: min(100% - 1rem, 1100px);[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .panel {[m
+[32m+[m[32m    padding: 1rem;[m
+[32m+[m[32m    border-radius: 14px;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .preview-heading,[m
+[32m+[m[32m  .profile-card {[m
+[32m+[m[32m    grid-template-columns: 1fr;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .preview-heading {[m
+[32m+[m[32m    display: grid;[m
+[32m+[m[32m  }[m
+[32m+[m
+[32m+[m[32m  .counter {[m
+[32m+[m[32m    justify-self: start;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
+[32m+[m
+[32m+[m[32m@media (prefers-reduced-motion: reduce) {[m
+[32m+[m[32m  *,[m
+[32m+[m[32m  *::before,[m
+[32m+[m[32m  *::after {[m
+[32m+[m[32m    scroll-behavior: auto !important;[m
+[32m+[m[32m    transition-duration: 0.01ms !important;[m
+[32m+[m[32m  }[m
+[32m+[m[32m}[m
